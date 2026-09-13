@@ -1,4 +1,5 @@
 // ── Demo mode: semua request dihandle oleh dummy handler ─────────────────
+import type { Verifikasi } from './verifikasi'
 import {
   DUMMY_PEGAWAI,
   DUMMY_PENGAJUAN,
@@ -99,7 +100,7 @@ function handle(method: string, path: string, body?: unknown): Promise<unknown> 
   if (path.match(/^\/verifikasi\/[\w-]+\/init$/) && method === 'POST') {
     const pengajuanId = path.split('/')[2]
     const d = body as any
-    const v = { id: 'vf-' + Date.now(), pengajuanId, nipVerifikator: d.nipVerifikator, status: 'menunggu', updatedAt: new Date().toISOString() }
+    const v: Verifikasi = { id: 'vf-' + Date.now(), pengajuanId, nipVerifikator: d.nipVerifikator, status: 'menunggu' as const, updatedAt: new Date().toISOString() }
     _verif = [..._verif, v]
     return delay(v)
   }
