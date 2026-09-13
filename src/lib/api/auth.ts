@@ -1,5 +1,3 @@
-import { getSession } from 'next-auth/react'
-
 export interface AuthUser {
   nip: string
   nama: string
@@ -9,24 +7,18 @@ export interface AuthUser {
   role: string
 }
 
-export interface LoginResponse {
-  access_token: string
-  user: AuthUser
-}
-
+// Demo mode: selalu return admin tanpa perlu session/login
 export function logout() {
-  window.location.href = '/api/auth/signout'
+  window.location.href = '/login'
 }
 
 export async function getMe(): Promise<AuthUser> {
-  const session = await getSession()
-  if (!session?.user) throw new Error('Unauthorized')
   return {
-    nip:     (session as any).nip ?? '',
-    nama:    session.user.name ?? '',
-    jabatan: (session.user as any).jabatan ?? '',
-    unit:    (session.user as any).unit ?? '',
-    email:   session.user.email ?? '',
-    role:    (session.user as any).role ?? 'pegawai',
+    nip:     '199001012020121001',
+    nama:    'Admin Demo',
+    jabatan: 'Kepala Biro',
+    unit:    'Biro Sumber Daya Manusia',
+    email:   'admin@demo.go.id',
+    role:    'admin',
   }
 }

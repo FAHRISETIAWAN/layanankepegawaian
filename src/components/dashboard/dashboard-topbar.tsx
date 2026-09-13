@@ -1,8 +1,6 @@
 'use client'
 
 import { ArrowRightStartOnRectangleIcon } from '@heroicons/react/24/outline'
-import { signOut } from 'next-auth/react'
-import { useSession } from 'next-auth/react'
 import { usePathname } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { ThemeToggle } from './theme-toggle'
@@ -33,15 +31,14 @@ const PAGE_LABELS: Record<string, string> = {
 export function DashboardTopbar() {
   const pathname = usePathname()
   const pageLabel = PAGE_LABELS[pathname] ?? 'Halaman'
-  const { data: session } = useSession()
-  const nama = session?.user?.name ?? 'Sultan Hasanudin'
-  const nip  = (session as { nip?: string } | null)?.nip ?? ''
-  const initials = nama.split(' ').slice(0, 2).map((w: string) => w[0]).join('').toUpperCase()
+  const nama     = 'Admin Demo'
+  const nip      = '199001012020121001'
+  const initials = 'AD'
   const [open, setOpen] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
 
   const handleLogout = () => {
-    signOut({ callbackUrl: '/login' })
+    window.location.href = '/login'
   }
 
   return (

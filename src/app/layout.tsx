@@ -1,4 +1,3 @@
-import { AuthSessionProvider } from '@/components/auth/session-provider'
 import { ThemeProvider } from '@/components/theme-provider'
 import { GooeyToaster } from '@/components/ui/gooey-toaster'
 import '@/styles/tailwind.css'
@@ -17,12 +16,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="id" suppressHydrationWarning>
       <body className="font-sans antialiased">
-        <AuthSessionProvider>
-          <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
-            {children}
-            <GooeyToaster />
-          </ThemeProvider>
-        </AuthSessionProvider>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+          {children}
+          <GooeyToaster />
+        </ThemeProvider>
       </body>
     </html>
   )
